@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://b165m801fqrky"]
+
+[ext_resource type="Texture2D" uid="uid://dkp83fhejmy62" path="res://addons/worldgraph/assets/add.svg" id="2_q4kbp"]
+[ext_resource type="Texture2D" uid="uid://c4s3vn46ashcb" path="res://addons/worldgraph/assets/remove.svg" id="3_imton"]
+[ext_resource type="PackedScene" uid="uid://33dme8ki2tu8" path="res://addons/worldgraph/scenes/editor/graph_editor.tscn" id="3_tgaks"]
+
+[node name="GraphEditorPanel" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="AddNode" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Add Node"
+icon = ExtResource("2_q4kbp")
+
+[node name="DeleteNode" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Delete Node"
+icon = ExtResource("3_imton")
+
+[node name="GraphEditor" parent="." instance=ExtResource("3_tgaks")]
+layout_mode = 2
+size_flags_vertical = 3
