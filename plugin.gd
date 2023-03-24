@@ -15,8 +15,6 @@ var node_graph_resource: NodeGraph
 var bottom_panel_button_visible := false
 
 func _enter_tree() -> void:
-	bottom_panel_instance = bottom_panel_scene.instantiate()
-
 	_make_visible(false)
 
 	_connect_signals()
@@ -109,11 +107,13 @@ func get_selected_node_node_graph() -> NodeGraph:
 func update_bottom_panel_control(resource: NodeGraph):
 	if not resource:
 		remove_control_from_bottom_panel(bottom_panel_instance)
+		clean_up_bottom_panel()
 		bottom_panel_button_visible = false
 		return
 
 	if bottom_panel_button_visible: return
 
+	bottom_panel_instance = bottom_panel_scene.instantiate()
 	bottom_panel_button = add_control_to_bottom_panel(bottom_panel_instance, "World Graph Editor")
 	bottom_panel_button_visible = true
 

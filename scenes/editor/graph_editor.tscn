@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://33dme8ki2tu8"]
+[gd_scene load_steps=6 format=3 uid="uid://33dme8ki2tu8"]
 
 [ext_resource type="Script" path="res://addons/worldgraph/scripts/editor/graph_editor.gd" id="1_3apl6"]
 [ext_resource type="PackedScene" uid="uid://bmcmjor018sgy" path="res://addons/worldgraph/scenes/editor/graph_editor_overlay.tscn" id="2_116bi"]
 [ext_resource type="PackedScene" uid="uid://nqliamo1pe80" path="res://addons/worldgraph/scenes/editor/graph_editor_ui.tscn" id="3_slnlf"]
+[ext_resource type="Shader" path="res://addons/worldgraph/resources/grid_background_shader.gdshader" id="4_dvsu8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8vorm"]
+shader = ExtResource("4_dvsu8")
+shader_parameter/background_color = Color(0.133333, 0.133333, 0.133333, 1)
+shader_parameter/grid_color = Color(0.239216, 0.239216, 0.239216, 1)
+shader_parameter/grid_offset = Vector2(0, 0)
+shader_parameter/grid_zoom = 1
 
 [node name="GraphEditor" type="SubViewportContainer"]
 anchors_preset = 15
@@ -15,11 +23,30 @@ script = ExtResource("1_3apl6")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 unique_name_in_owner = true
+disable_3d = true
 handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="SubViewport"]
+unique_name_in_owner = true
+anchor_mode = 0
+editor_draw_screen = false
 
 [node name="EditorOverlay" parent="SubViewport" instance=ExtResource("2_116bi")]
 unique_name_in_owner = true
 
 [node name="GraphUI" parent="SubViewport" instance=ExtResource("3_slnlf")]
+
+[node name="Background" type="CanvasLayer" parent="SubViewport"]
+layer = -100
+
+[node name="Texture" type="ColorRect" parent="SubViewport/Background"]
+unique_name_in_owner = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_8vorm")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
