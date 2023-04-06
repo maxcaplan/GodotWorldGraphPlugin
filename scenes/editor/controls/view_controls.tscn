@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjscodhfrs7rm"]
+
+[ext_resource type="Script" path="res://addons/worldgraph/scripts/editor/controls/view_controls.gd" id="1_8bd5r"]
+[ext_resource type="Texture2D" uid="uid://cevtkoaviw2jq" path="res://addons/worldgraph/assets/CenterView.svg" id="1_biqg1"]
+[ext_resource type="Texture2D" uid="uid://diija23h8ohmc" path="res://addons/worldgraph/assets/ZoomLess.svg" id="2_a2k8b"]
+[ext_resource type="Texture2D" uid="uid://x73trdv186ph" path="res://addons/worldgraph/assets/ZoomReset.svg" id="3_421j1"]
+[ext_resource type="Texture2D" uid="uid://cbowtjit7bllb" path="res://addons/worldgraph/assets/ZoomMore.svg" id="4_afmoa"]
+
+[node name="ViewControls" type="HBoxContainer"]
+theme_override_constants/separation = 16
+script = ExtResource("1_8bd5r")
+
+[node name="CenterViewContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="CenterViewButton" type="TextureButton" parent="CenterViewContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Center View"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("1_biqg1")
+stretch_mode = 5
+
+[node name="ZoomControls" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="ZoomLessContainer" type="CenterContainer" parent="ZoomControls"]
+layout_mode = 2
+
+[node name="ZoomLessButton" type="TextureButton" parent="ZoomControls/ZoomLessContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Zoom Less"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_a2k8b")
+stretch_mode = 6
+
+[node name="ZoomResetContainer" type="CenterContainer" parent="ZoomControls"]
+layout_mode = 2
+
+[node name="ZoomResetButton" type="TextureButton" parent="ZoomControls/ZoomResetContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "Reset Zoom"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_421j1")
+stretch_mode = 6
+
+[node name="ZoomMoreContainer" type="CenterContainer" parent="ZoomControls"]
+layout_mode = 2
+
+[node name="ZoomMoreButton" type="TextureButton" parent="ZoomControls/ZoomMoreContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "Zoom More"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_afmoa")
+stretch_mode = 6
+
+[connection signal="pressed" from="CenterViewContainer/CenterViewButton" to="." method="_on_center_view_button_pressed"]
+[connection signal="pressed" from="ZoomControls/ZoomLessContainer/ZoomLessButton" to="." method="_on_zoom_less_button_pressed"]
+[connection signal="pressed" from="ZoomControls/ZoomResetContainer/ZoomResetButton" to="." method="_on_zoom_reset_button_pressed"]
+[connection signal="pressed" from="ZoomControls/ZoomMoreContainer/ZoomMoreButton" to="." method="_on_zoom_more_button_pressed"]

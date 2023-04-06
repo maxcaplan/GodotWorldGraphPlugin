@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://cf4l7s82xnkuf"]
+
+[ext_resource type="Script" path="res://addons/worldgraph/scripts/editor/graph_node_ui.gd" id="1_i6xlk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mafjs"]
+bg_color = Color(0.239216, 0.239216, 0.239216, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.427451, 0.427451, 0.427451, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="GraphNodeUI" type="PanelContainer"]
+offset_left = 369.0
+offset_top = 273.0
+offset_right = 657.0
+offset_bottom = 455.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mafjs")
+script = ExtResource("1_i6xlk")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Panel" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="NameLineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Node"
+placeholder_text = "Node Name ..."

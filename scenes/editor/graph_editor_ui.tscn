@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://nqliamo1pe80"]
+[gd_scene load_steps=2 format=3 uid="uid://nqliamo1pe80"]
 
 [ext_resource type="Script" path="res://addons/worldgraph/scripts/editor/graph_editor_ui.gd" id="1_l752t"]
-[ext_resource type="Texture2D" uid="uid://ctjto4vi5kb6w" path="res://icon.svg" id="2_qgaj1"]
 
 [node name="GraphUI" type="Node2D"]
 script = ExtResource("1_l752t")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(616, 351)
-texture = ExtResource("2_qgaj1")
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+anchor_mode = 0
+editor_draw_screen = false
+
+[node name="GraphNodesUI" type="Node2D" parent="."]
+unique_name_in_owner = true

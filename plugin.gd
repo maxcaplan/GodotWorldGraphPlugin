@@ -10,20 +10,31 @@ var editor_interface := get_editor_interface()
 var editor_selection := editor_interface.get_selection()
 var inspector := editor_interface.get_inspector()
 
-var node_graph_resource: NodeGraph
-
 var bottom_panel_button_visible := false
 
-func _enter_tree() -> void:
-	_make_visible(false)
+var world_graph_singleton : WorldGraphSingleton
+var node_graph_resource : NodeGraph
 
+func _enter_tree() -> void:
+	add_autoload_singleton('WorldGraphGlobal', "res://addons/worldgraph/scripts/world_graph_global.gd")
+
+	world_graph_singleton = get_tree().root.find_child("WorldGraphGlobal", true, false)
+
+	if not world_graph_singleton:
+		push_error("World Graph Plugin init failed - Unable to find WorldGraphGlobal auto load")
+		return
+
+
+	_make_visible(false)
 	_connect_signals()
 
-	node_graph_resource = get_selected_node_node_graph()
-	update_bottom_panel_control(node_graph_resource)
+	world_graph_singleton.node_graph_resource = get_selected_node_node_graph()
+	update_bottom_panel_control(world_graph_singleton.node_graph_resource)
 
 
 func _exit_tree() -> void:
+	remove_autoload_singleton('WorldGraphGlobal')
+
 	clean_up_bottom_panel()
 
 	_disconnect_signals()
@@ -43,18 +54,18 @@ func _get_plugin_icon() -> Texture2D:
 
 
 func _on_editor_selection_changed():
-	node_graph_resource = get_selected_node_node_graph()
-	update_bottom_panel_control(node_graph_resource)
+	world_graph_singleton.node_graph_resource = get_selected_node_node_graph()
+	update_bottom_panel_control(world_graph_singleton.node_graph_resource)
 
 
 func _on_inspector_property_edited(property: String):
-	node_graph_resource = get_selected_node_node_graph()
-	update_bottom_panel_control(node_graph_resource)
+	world_graph_singleton.node_graph_resource = get_selected_node_node_graph()
+	update_bottom_panel_control(world_graph_singleton.node_graph_resource)
 
 
 func _on_inspector_resource_selected(resource: Resource, path: String):
-	node_graph_resource = resource if resource is NodeGraph else null
-	update_bottom_panel_control(node_graph_resource)
+	world_graph_singleton.node_graph_resource = get_selected_node_node_graph()
+	update_bottom_panel_control(world_graph_singleton.node_graph_resource)
 
 func _on_inspector_object_changed():
 	var file_system_current_path = editor_interface.get_current_path()
@@ -64,8 +75,8 @@ func _on_inspector_object_changed():
 
 	var resource : = load(file_system_current_path)
 
-	node_graph_resource = resource if resource is NodeGraph else null
-	update_bottom_panel_control(node_graph_resource)
+	world_graph_singleton.node_graph_resource = resource if resource is NodeGraph else null
+	update_bottom_panel_control(world_graph_singleton.node_graph_resource)
 
 
 func _connect_signals() -> void:

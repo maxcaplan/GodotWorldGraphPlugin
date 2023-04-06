@@ -1,7 +1,43 @@
-[gd_resource type="Resource" script_class="NodeGraph" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="NodeGraph" load_steps=11 format=3 uid="uid://dngn5ovxdra5q"]
 
 [ext_resource type="Script" path="res://addons/worldgraph/scripts/resources/node_graph.gd" id="1_5nun7"]
+[ext_resource type="Script" path="res://addons/worldgraph/scripts/resources/node_graph_edge.gd" id="1_6ybr4"]
+[ext_resource type="Script" path="res://addons/worldgraph/scripts/resources/room_node.gd" id="1_uyiwp"]
+[ext_resource type="Script" path="res://addons/worldgraph/scripts/resources/room_node_vertex.gd" id="3_mrkda"]
+
+[sub_resource type="Resource" id="Resource_wx348"]
+script = ExtResource("3_mrkda")
+name = "Test"
+side = 0
+
+[sub_resource type="Resource" id="Resource_6jccs"]
+script = ExtResource("3_mrkda")
+name = "Test 2"
+side = 1
+
+[sub_resource type="Resource" id="Resource_x5ith"]
+script = ExtResource("1_6ybr4")
+vertex_a = SubResource("Resource_wx348")
+vertex_b = SubResource("Resource_6jccs")
+
+[sub_resource type="Resource" id="Resource_l44fi"]
+script = ExtResource("1_uyiwp")
+room_name = "Test Room One"
+vertices = Array[ExtResource("3_mrkda")]([SubResource("Resource_wx348")])
+position = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_bh44m"]
+script = ExtResource("3_mrkda")
+name = "Test 3"
+side = 1
+
+[sub_resource type="Resource" id="Resource_vy04r"]
+script = ExtResource("1_uyiwp")
+room_name = "Test Room 2"
+vertices = Array[ExtResource("3_mrkda")]([SubResource("Resource_6jccs"), SubResource("Resource_bh44m")])
+position = Vector2(100, 100)
 
 [resource]
 script = ExtResource("1_5nun7")
-nodes = Array[Resource("res://addons/worldgraph/scripts/room_node.gd")]([])
+nodes = Array[ExtResource("1_uyiwp")]([SubResource("Resource_l44fi"), SubResource("Resource_vy04r")])
+edges = Array[ExtResource("1_6ybr4")]([SubResource("Resource_x5ith")])

@@ -1,13 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://b165m801fqrky"]
+[gd_scene load_steps=6 format=3 uid="uid://b165m801fqrky"]
 
-[ext_resource type="Texture2D" uid="uid://dkp83fhejmy62" path="res://addons/worldgraph/assets/add.svg" id="2_q4kbp"]
-[ext_resource type="Texture2D" uid="uid://diija23h8ohmc" path="res://addons/worldgraph/assets/ZoomLess.svg" id="3_hhf3h"]
-[ext_resource type="Texture2D" uid="uid://c4s3vn46ashcb" path="res://addons/worldgraph/assets/remove.svg" id="3_imton"]
+[ext_resource type="Script" path="res://addons/worldgraph/scripts/editor/graph_editor_panel.gd" id="1_7ni3e"]
+[ext_resource type="PackedScene" uid="uid://wqrhb6ptpb2c" path="res://addons/worldgraph/scenes/editor/controls/node_controls.tscn" id="3_26ypo"]
 [ext_resource type="PackedScene" uid="uid://33dme8ki2tu8" path="res://addons/worldgraph/scenes/editor/graph_editor.tscn" id="3_tgaks"]
-[ext_resource type="Texture2D" uid="uid://x73trdv186ph" path="res://addons/worldgraph/assets/ZoomReset.svg" id="4_s0snw"]
-[ext_resource type="Texture2D" uid="uid://cbowtjit7bllb" path="res://addons/worldgraph/assets/ZoomMore.svg" id="5_bad7k"]
+[ext_resource type="PackedScene" uid="uid://cjscodhfrs7rm" path="res://addons/worldgraph/scenes/editor/controls/view_controls.tscn" id="4_jlgon"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qemkw"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q6vcj"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
@@ -19,58 +18,36 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_7ni3e")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="AddNode" type="Button" parent="HBoxContainer"]
+[node name="NodeControls" parent="HBoxContainer" instance=ExtResource("3_26ypo")]
 layout_mode = 2
-text = "Add Node"
-icon = ExtResource("2_q4kbp")
-
-[node name="DeleteNode" type="Button" parent="HBoxContainer"]
-layout_mode = 2
-text = "Delete Node"
-icon = ExtResource("3_imton")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/HBoxContainer"]
+[node name="ViewControls" parent="HBoxContainer/HBoxContainer" instance=ExtResource("4_jlgon")]
+unique_name_in_owner = true
 layout_mode = 2
-
-[node name="ZoomLessButton" type="TextureButton" parent="HBoxContainer/HBoxContainer/CenterContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-texture_normal = ExtResource("3_hhf3h")
-stretch_mode = 5
-
-[node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="ZoomResetButton" type="TextureButton" parent="HBoxContainer/HBoxContainer/CenterContainer2"]
-layout_mode = 2
-texture_normal = ExtResource("4_s0snw")
-stretch_mode = 4
-
-[node name="CenterContainer3" type="CenterContainer" parent="HBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="ZoomMoreButton" type="TextureButton" parent="HBoxContainer/HBoxContainer/CenterContainer3"]
-layout_mode = 2
-texture_normal = ExtResource("5_bad7k")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_qemkw")
+theme_override_styles/panel = SubResource("StyleBoxFlat_q6vcj")
 
 [node name="GraphEditor" parent="PanelContainer" instance=ExtResource("3_tgaks")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 size_flags_vertical = 3
 
-[connection signal="pressed" from="HBoxContainer/HBoxContainer/CenterContainer/ZoomLessButton" to="PanelContainer/GraphEditor" method="_on_zoom_less_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/HBoxContainer/CenterContainer2/ZoomResetButton" to="PanelContainer/GraphEditor" method="_on_zoom_reset_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/HBoxContainer/CenterContainer3/ZoomMoreButton" to="PanelContainer/GraphEditor" method="_on_zoom_more_button_pressed"]
+[connection signal="center_view_button_pressed" from="HBoxContainer/HBoxContainer/ViewControls" to="." method="_on_center_view_button_pressed"]
+[connection signal="zoom_less_button_pressed" from="HBoxContainer/HBoxContainer/ViewControls" to="." method="_on_zoom_less_button_pressed"]
+[connection signal="zoom_more_button_pressed" from="HBoxContainer/HBoxContainer/ViewControls" to="." method="_on_zoom_more_button_pressed"]
+[connection signal="zoom_reset_button_pressed" from="HBoxContainer/HBoxContainer/ViewControls" to="." method="_on_zoom_reset_button_pressed"]
