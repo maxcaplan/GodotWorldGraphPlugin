@@ -13,6 +13,7 @@ shader_parameter/grid_offset = Vector2(0, 0)
 shader_parameter/grid_zoom = 1
 
 [node name="GraphEditor" type="SubViewportContainer"]
+clip_contents = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

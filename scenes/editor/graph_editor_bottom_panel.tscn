@@ -1,0 +1,222 @@
+[gd_scene load_steps=11 format=3 uid="uid://b165m801fqrky"]
+
+[ext_resource type="Script" path="res://addons/worldgraph/scripts/editor/graph_editor_panel.gd" id="1_uknc1"]
+[ext_resource type="Script" path="res://addons/worldgraph/scripts/editor/graph_editor_side_panel.gd" id="2_c2fmr"]
+[ext_resource type="PackedScene" uid="uid://wqrhb6ptpb2c" path="res://addons/worldgraph/scenes/editor/controls/node_controls.tscn" id="2_w3q4r"]
+[ext_resource type="PackedScene" uid="uid://bulhle3rbq23u" path="res://addons/worldgraph/scenes/editor/side_bar/file_badge.tscn" id="3_3b856"]
+[ext_resource type="PackedScene" uid="uid://cjscodhfrs7rm" path="res://addons/worldgraph/scenes/editor/controls/view_controls.tscn" id="3_v42px"]
+[ext_resource type="Texture2D" uid="uid://dh6h8julxo2th" path="res://addons/worldgraph/assets/Back.svg" id="4_el6ob"]
+[ext_resource type="PackedScene" uid="uid://33dme8ki2tu8" path="res://addons/worldgraph/scenes/editor/graph_editor.tscn" id="4_g5fuq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_76lym"]
+bg_color = Color(0.14902, 0.14902, 0.14902, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tavod"]
+resource_local_to_scene = true
+bg_color = Color(0.133333, 0.133333, 0.133333, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q6vcj"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="GraphEditorBottomPanel" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+script = ExtResource("1_uknc1")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SideBar" type="VBoxContainer" parent="HSplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("2_c2fmr")
+
+[node name="LoadFileDialog" type="FileDialog" parent="HSplitContainer/SideBar"]
+unique_name_in_owner = true
+initial_position = 2
+title = "Load WorldGraph"
+size = Vector2i(320, 640)
+ok_button_text = "Open"
+mode_overrides_title = false
+file_mode = 0
+filters = PackedStringArray("*.tres", "*.res")
+show_hidden_files = true
+
+[node name="SaveFileAsDialog" type="FileDialog" parent="HSplitContainer/SideBar"]
+unique_name_in_owner = true
+initial_position = 2
+title = "Save WorldGraph"
+size = Vector2i(392, 649)
+mode_overrides_title = false
+filters = PackedStringArray("*.tres", "*.res")
+show_hidden_files = true
+
+[node name="ErrorDialog" type="AcceptDialog" parent="HSplitContainer/SideBar"]
+unique_name_in_owner = true
+
+[node name="NewConfirmationDialog" type="ConfirmationDialog" parent="HSplitContainer/SideBar"]
+unique_name_in_owner = true
+title = "New WorldGraph"
+ok_button_text = "Save"
+dialog_text = "Do you want to save the current WorldGraph?"
+cancel_button_text = "Dont't Save"
+
+[node name="LoadConfirmationDialog" type="ConfirmationDialog" parent="HSplitContainer/SideBar"]
+unique_name_in_owner = true
+title = "Load World Graph"
+ok_button_text = "Save"
+dialog_text = "Do you want to save the current WorldGraph?"
+cancel_button_text = "Don't Save"
+
+[node name="CloseConfirmationDialog" type="ConfirmationDialog" parent="HSplitContainer/SideBar"]
+unique_name_in_owner = true
+title = "Close WorldGraph"
+ok_button_text = "Save"
+dialog_text = "Do you want to save before closing?"
+cancel_button_text = "Don't Save"
+
+[node name="FileButton" type="MenuButton" parent="HSplitContainer/SideBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "File"
+item_count = 7
+popup/item_0/text = "New WorldGraph"
+popup/item_0/id = 0
+popup/item_1/text = ""
+popup/item_1/id = -1
+popup/item_1/separator = true
+popup/item_2/text = "Load WorldGraph"
+popup/item_2/id = 1
+popup/item_3/text = "Save File"
+popup/item_3/id = 2
+popup/item_4/text = "Save File As"
+popup/item_4/id = 3
+popup/item_5/text = ""
+popup/item_5/id = -1
+popup/item_5/separator = true
+popup/item_6/text = "Close File"
+popup/item_6/id = 4
+
+[node name="Body" type="PanelContainer" parent="HSplitContainer/SideBar"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_76lym")
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/SideBar/Body"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer/SideBar/Body/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollBody" type="VBoxContainer" parent="HSplitContainer/SideBar/Body/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FilePanel" type="PanelContainer" parent="HSplitContainer/SideBar/Body/MarginContainer/ScrollContainer/ScrollBody"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tavod")
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/SideBar/Body/MarginContainer/ScrollContainer/ScrollBody/FilePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 0
+
+[node name="FileBadge" parent="HSplitContainer/SideBar/Body/MarginContainer/ScrollContainer/ScrollBody/FilePanel/MarginContainer" instance=ExtResource("3_3b856")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="Body" type="VBoxContainer" parent="HSplitContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Controls" type="HBoxContainer" parent="HSplitContainer/Body"]
+clip_contents = true
+layout_mode = 2
+
+[node name="NodeControls" parent="HSplitContainer/Body/Controls" instance=ExtResource("2_w3q4r")]
+layout_mode = 2
+
+[node name="RightAlign" type="HBoxContainer" parent="HSplitContainer/Body/Controls"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="ViewControls" parent="HSplitContainer/Body/Controls/RightAlign" instance=ExtResource("3_v42px")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EditorPanel" type="PanelContainer" parent="HSplitContainer/Body"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_q6vcj")
+
+[node name="GraphEditor" parent="HSplitContainer/Body/EditorPanel" instance=ExtResource("4_g5fuq")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Footer" type="HBoxContainer" parent="HSplitContainer/Body"]
+layout_mode = 2
+
+[node name="SideBarToggleContainer" type="CenterContainer" parent="HSplitContainer/Body/Footer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="SideBarToggleButton" type="TextureButton" parent="HSplitContainer/Body/Footer/SideBarToggleContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Zoom Less"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_el6ob")
+stretch_mode = 5
+
+[connection signal="file_selected" from="HSplitContainer/SideBar/LoadFileDialog" to="HSplitContainer/SideBar" method="_on_load_file_selected"]
+[connection signal="file_selected" from="HSplitContainer/SideBar/SaveFileAsDialog" to="HSplitContainer/SideBar" method="_on_save_file_selected"]
+[connection signal="canceled" from="HSplitContainer/SideBar/NewConfirmationDialog" to="HSplitContainer/SideBar" method="create_new_node_graph_resource" binds= [false]]
+[connection signal="confirmed" from="HSplitContainer/SideBar/NewConfirmationDialog" to="HSplitContainer/SideBar" method="create_new_node_graph_resource" binds= [true]]
+[connection signal="canceled" from="HSplitContainer/SideBar/LoadConfirmationDialog" to="HSplitContainer/SideBar" method="open_load_dialog" binds= [false]]
+[connection signal="confirmed" from="HSplitContainer/SideBar/LoadConfirmationDialog" to="HSplitContainer/SideBar" method="open_load_dialog" binds= [true]]
+[connection signal="canceled" from="HSplitContainer/SideBar/CloseConfirmationDialog" to="HSplitContainer/SideBar" method="close_current_file" binds= [false]]
+[connection signal="confirmed" from="HSplitContainer/SideBar/CloseConfirmationDialog" to="HSplitContainer/SideBar" method="close_current_file" binds= [true]]
+[connection signal="pressed" from="HSplitContainer/SideBar/FileButton" to="HSplitContainer/SideBar" method="_on_file_button_pressed"]
+[connection signal="center_view_button_pressed" from="HSplitContainer/Body/Controls/RightAlign/ViewControls" to="." method="_on_center_view_button_pressed"]
+[connection signal="zoom_less_button_pressed" from="HSplitContainer/Body/Controls/RightAlign/ViewControls" to="." method="_on_zoom_less_button_pressed"]
+[connection signal="zoom_more_button_pressed" from="HSplitContainer/Body/Controls/RightAlign/ViewControls" to="." method="_on_zoom_more_button_pressed"]
+[connection signal="zoom_reset_button_pressed" from="HSplitContainer/Body/Controls/RightAlign/ViewControls" to="." method="_on_zoom_reset_button_pressed"]
+[connection signal="pressed" from="HSplitContainer/Body/Footer/SideBarToggleContainer/SideBarToggleButton" to="." method="_on_side_bar_toggle_pressed"]

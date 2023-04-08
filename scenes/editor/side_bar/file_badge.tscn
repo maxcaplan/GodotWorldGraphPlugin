@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://bulhle3rbq23u"]
+
+[ext_resource type="Script" path="res://addons/worldgraph/scripts/editor/side_bar/file_badge.gd" id="1_ia6c7"]
+[ext_resource type="Texture2D" uid="uid://beb543adbu0cf" path="res://addons/worldgraph/assets/plugin_icon.svg" id="2_yldjp"]
+
+[node name="FileBadge" type="HBoxContainer"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+script = ExtResource("1_ia6c7")
+
+[node name="Icon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("2_yldjp")
+stretch_mode = 5
+
+[node name="FileName" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Test.tres"
+text_overrun_behavior = 3
+
+[node name="Unsaved" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "(*)"
+horizontal_alignment = 2

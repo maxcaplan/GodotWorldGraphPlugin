@@ -18,14 +18,14 @@ var graph_nodes: Array[GraphNodeUI] = []
 func _ready() -> void:
 	get_viewport().gui_focus_changed.connect(_on_control_focus_changed)
 
-	WorldGraphGlobal.node_graph_resource_refrence_changed.connect(_on_node_graph_resource_refrence_changed)
-	WorldGraphGlobal.node_graph_resource_changed.connect(_on_node_graph_resource_changed)
+	#WorldGraphGlobal.node_graph_resource_refrence_changed.connect(_on_node_graph_resource_refrence_changed)
+	#WorldGraphGlobal.node_graph_resource_changed.connect(_on_node_graph_resource_changed)
 
 func _exit_tree() -> void:
 	get_viewport().gui_focus_changed.disconnect(_on_control_focus_changed)
 
-	WorldGraphGlobal.node_graph_resource_refrence_changed.disconnect(_on_node_graph_resource_refrence_changed)
-	WorldGraphGlobal.node_graph_resource_changed.disconnect(_on_node_graph_resource_changed)
+	#WorldGraphGlobal.node_graph_resource_refrence_changed.disconnect(_on_node_graph_resource_refrence_changed)
+	#WorldGraphGlobal.node_graph_resource_changed.disconnect(_on_node_graph_resource_changed)
 
 func _on_node_graph_resource_refrence_changed():
 	printt("Resource Refrence changed to", WorldGraphGlobal.node_graph_resource)

@@ -1,7 +1,7 @@
 @tool
 extends EditorPlugin
 
-var bottom_panel_scene := preload("res://addons/worldgraph/scenes/editor/graph_editor_panel.tscn")
+var bottom_panel_scene := preload("res://addons/worldgraph/scenes/editor/graph_editor_bottom_panel.tscn")
 
 var bottom_panel_instance: Control
 var bottom_panel_button: Button
@@ -16,20 +16,13 @@ var world_graph_singleton : WorldGraphSingleton
 var node_graph_resource : NodeGraph
 
 func _enter_tree() -> void:
-	add_autoload_singleton('WorldGraphGlobal', "res://addons/worldgraph/scripts/world_graph_global.gd")
-
-	world_graph_singleton = get_tree().root.find_child("WorldGraphGlobal", true, false)
-
-	if not world_graph_singleton:
-		push_error("World Graph Plugin init failed - Unable to find WorldGraphGlobal auto load")
-		return
-
+	var init_err = init_autoload_singleton()
 
 	_make_visible(false)
 	_connect_signals()
 
-	world_graph_singleton.node_graph_resource = get_selected_node_node_graph()
-	update_bottom_panel_control(world_graph_singleton.node_graph_resource)
+	bottom_panel_instance = bottom_panel_scene.instantiate()
+	bottom_panel_button = add_control_to_bottom_panel(bottom_panel_instance, "World Graph Editor")
 
 
 func _exit_tree() -> void:
@@ -75,13 +68,17 @@ func _on_inspector_object_changed():
 
 	var resource : = load(file_system_current_path)
 
-	world_graph_singleton.node_graph_resource = resource if resource is NodeGraph else null
-	update_bottom_panel_control(world_graph_singleton.node_graph_resource)
+	#world_graph_singleton.node_graph_resource = resource if resource is NodeGraph else null
+	#update_bottom_panel_control(world_graph_singleton.node_graph_resource)
+
+	bottom_panel_instance = bottom_panel_scene.instantiate()
+	bottom_panel_button = add_control_to_bottom_panel(bottom_panel_instance, "World Graph Editor")
 
 
 func _connect_signals() -> void:
-	editor_selection.connect("selection_changed", _on_editor_selection_changed)
-	inspector.connect("property_edited", _on_inspector_property_edited)
+	pass
+	#editor_selection.connect("selection_changed", _on_editor_selection_changed)
+	#inspector.connect("property_edited", _on_inspector_property_edited)
 	#inspector.connect("resource_selected", _on_inspector_resource_selected)
 	#inspector.connect("edited_object_changed", _on_inspector_object_changed)
 
@@ -99,6 +96,24 @@ func _disconnect_signals() -> void:
 
 	if inspector.is_connected("edited_object_changed", _on_inspector_object_changed):
 		inspector.disconnect("edited_object_changed", _on_inspector_object_changed)
+
+
+func init_autoload_singleton() -> bool:
+	var find_autoload = func() -> Node:
+		return get_tree().root.find_child("WorldGraphGlobal", true, false)
+
+	world_graph_singleton = find_autoload.call()
+
+	if world_graph_singleton: return true
+
+	add_autoload_singleton('WorldGraphGlobal', "res://addons/worldgraph/scripts/world_graph_global.gd")
+	world_graph_singleton = find_autoload.call()
+
+	if not world_graph_singleton:
+		push_error("World Graph Plugin init failed - Unable to find WorldGraphGlobal auto load")
+		return false
+
+	return true
 
 
 func get_selected_node_node_graph() -> NodeGraph:
