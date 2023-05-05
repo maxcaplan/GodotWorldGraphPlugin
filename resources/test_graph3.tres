@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="NodeGraph" load_steps=2 format=3 uid="uid://doo1fnfrku2oi"]
-
-[ext_resource type="Script" path="res://addons/worldgraph/scripts/resources/node_graph.gd" id="1_86txn"]
-
-[resource]
-script = ExtResource("1_86txn")
-nodes = Array[Resource("res://addons/worldgraph/scripts/resources/room_node.gd")]([])
-edges = Array[Resource("res://addons/worldgraph/scripts/resources/node_graph_edge.gd")]([])

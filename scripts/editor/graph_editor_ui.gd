@@ -2,10 +2,12 @@
 class_name GraphUI
 extends Node2D
 
+#@onready var world_graph_singleton = get_tree().root.find_child("WorldGraphGlobal", true, false)
+
 @onready var graph_node_ui_scene = load("res://addons/worldgraph/scenes/editor/graph_node_ui.tscn")
 
-@onready var camera_2d: Camera2D = %Camera2D
-@onready var graph_nodes_ui: Node2D = %GraphNodesUI
+@onready var camera_2d: Camera2D = get_node("%Camera2D")
+@onready var graph_nodes_ui: Node2D = get_node("%GraphNodesUI")
 
 var focused_control : Control
 
@@ -16,22 +18,18 @@ var drag_offset := Vector2.ZERO
 var graph_nodes: Array[GraphNodeUI] = []
 
 func _ready() -> void:
-	get_viewport().gui_focus_changed.connect(_on_control_focus_changed)
+	#get_viewport().gui_focus_changed.connect(_on_control_focus_changed)
 
-	#WorldGraphGlobal.node_graph_resource_refrence_changed.connect(_on_node_graph_resource_refrence_changed)
-	#WorldGraphGlobal.node_graph_resource_changed.connect(_on_node_graph_resource_changed)
+	#if not world_graph_singleton:
+	#	push_error("Failed to find WorldGraphGlobal autoload (graph_editor_ui.gd)")
+	#	return
+	pass
+
 
 func _exit_tree() -> void:
-	get_viewport().gui_focus_changed.disconnect(_on_control_focus_changed)
+	pass
+	#get_viewport().gui_focus_changed.disconnect(_on_control_focus_changed)
 
-	#WorldGraphGlobal.node_graph_resource_refrence_changed.disconnect(_on_node_graph_resource_refrence_changed)
-	#WorldGraphGlobal.node_graph_resource_changed.disconnect(_on_node_graph_resource_changed)
-
-func _on_node_graph_resource_refrence_changed():
-	printt("Resource Refrence changed to", WorldGraphGlobal.node_graph_resource)
-
-func _on_node_graph_resource_changed():
-	printt("Resource Change")
 
 func _set_node_graph_resource(resource: NodeGraph):
 	for node in graph_nodes:
@@ -72,7 +70,6 @@ func _on_node_input(event: InputEvent, node: GraphNodeUI):
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		update_control_focus(event)
-
 
 
 # Releases focus if click outside of a control node

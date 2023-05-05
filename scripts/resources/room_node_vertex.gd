@@ -9,8 +9,8 @@ enum NodeSides {
 	BOTTOM
 }
 
-@export var name: String = "Vertex" : set = _set_name
-@export var side: NodeSides : set = _set_side
+var name: String = "Vertex" : set = _set_name
+var side: NodeSides : set = _set_side
 
 func _set_name(value: String) -> void:
 	if value == "":

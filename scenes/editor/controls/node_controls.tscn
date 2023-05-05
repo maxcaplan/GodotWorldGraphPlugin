@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://c4s3vn46ashcb" path="res://addons/worldgraph/assets/remove.svg" id="2_82crn"]
 
 [node name="NodeControls" type="HBoxContainer"]
+offset_right = 229.0
+offset_bottom = 31.0
 
 [node name="AddNode" type="Button" parent="."]
 layout_mode = 2

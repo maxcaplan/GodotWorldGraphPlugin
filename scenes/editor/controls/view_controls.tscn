@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://cbowtjit7bllb" path="res://addons/worldgraph/assets/ZoomMore.svg" id="4_afmoa"]
 
 [node name="ViewControls" type="HBoxContainer"]
+offset_right = 120.0
+offset_bottom = 24.0
 theme_override_constants/separation = 16
 script = ExtResource("1_8bd5r")
 
@@ -14,6 +16,7 @@ script = ExtResource("1_8bd5r")
 layout_mode = 2
 
 [node name="CenterViewButton" type="TextureButton" parent="CenterViewContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
@@ -29,6 +32,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="ZoomLessButton" type="TextureButton" parent="ZoomControls/ZoomLessContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
@@ -41,6 +45,7 @@ stretch_mode = 6
 layout_mode = 2
 
 [node name="ZoomResetButton" type="TextureButton" parent="ZoomControls/ZoomResetContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 tooltip_text = "Reset Zoom"
@@ -52,14 +57,10 @@ stretch_mode = 6
 layout_mode = 2
 
 [node name="ZoomMoreButton" type="TextureButton" parent="ZoomControls/ZoomMoreContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 tooltip_text = "Zoom More"
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("4_afmoa")
 stretch_mode = 6
-
-[connection signal="pressed" from="CenterViewContainer/CenterViewButton" to="." method="_on_center_view_button_pressed"]
-[connection signal="pressed" from="ZoomControls/ZoomLessContainer/ZoomLessButton" to="." method="_on_zoom_less_button_pressed"]
-[connection signal="pressed" from="ZoomControls/ZoomResetContainer/ZoomResetButton" to="." method="_on_zoom_reset_button_pressed"]
-[connection signal="pressed" from="ZoomControls/ZoomMoreContainer/ZoomMoreButton" to="." method="_on_zoom_more_button_pressed"]

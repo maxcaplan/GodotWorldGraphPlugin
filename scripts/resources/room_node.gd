@@ -1,10 +1,10 @@
 extends Resource
 class_name RoomNode
 
-@export var room_name : String : set = _set_room_name
+var room_name : String : set = _set_room_name
 
-@export var vertices : Array[RoomNodeVertex] = [] : set = _set_vertices
-@export var position := Vector2.ZERO : set = _set_position
+var vertices : Array[RoomNodeVertex] = [] : set = _set_vertices
+var position := Vector2.ZERO : set = _set_position
 
 func _init(p_name = "", p_vertices = [], p_position = Vector2.ZERO) -> void:
 	room_name = p_name

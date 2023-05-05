@@ -1,0 +1,115 @@
+[gd_scene load_steps=6 format=3 uid="uid://d18p5b6maaw1o"]
+
+[ext_resource type="Script" path="res://addons/worldgraph/scripts/editor/side_bar/graph_editor_side_bar.gd" id="1_m4rgg"]
+[ext_resource type="PackedScene" uid="uid://bulhle3rbq23u" path="res://addons/worldgraph/scenes/editor/side_bar/file_badge.tscn" id="2_5y2ox"]
+[ext_resource type="Script" path="res://addons/worldgraph/scripts/editor/side_bar/file_dialogs.gd" id="2_drckm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_76lym"]
+bg_color = Color(0.14902, 0.14902, 0.14902, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tavod"]
+resource_local_to_scene = true
+bg_color = Color(0.133333, 0.133333, 0.133333, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="SideBar" type="VBoxContainer"]
+script = ExtResource("1_m4rgg")
+
+[node name="FileDialogs" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("2_drckm")
+
+[node name="LoadFileDialog" type="FileDialog" parent="FileDialogs"]
+unique_name_in_owner = true
+initial_position = 2
+title = "Load WorldGraph"
+size = Vector2i(320, 640)
+ok_button_text = "Open"
+mode_overrides_title = false
+file_mode = 0
+filters = PackedStringArray("*.tres", "*.res")
+show_hidden_files = true
+
+[node name="SaveFileAsDialog" type="FileDialog" parent="FileDialogs"]
+unique_name_in_owner = true
+initial_position = 2
+title = "Save WorldGraph"
+size = Vector2i(392, 649)
+mode_overrides_title = false
+filters = PackedStringArray("*.tres", "*.res")
+show_hidden_files = true
+
+[node name="ErrorAcceptDialog" type="AcceptDialog" parent="FileDialogs"]
+unique_name_in_owner = true
+
+[node name="NewConfirmationDialog" type="ConfirmationDialog" parent="FileDialogs"]
+unique_name_in_owner = true
+title = "New WorldGraph"
+ok_button_text = "Save"
+dialog_text = "Do you want to save the current WorldGraph?"
+cancel_button_text = "Dont't Save"
+
+[node name="LoadConfirmationDialog" type="ConfirmationDialog" parent="FileDialogs"]
+unique_name_in_owner = true
+title = "Load World Graph"
+ok_button_text = "Save"
+dialog_text = "Do you want to save the current WorldGraph?"
+cancel_button_text = "Don't Save"
+
+[node name="CloseConfirmationDialog" type="ConfirmationDialog" parent="FileDialogs"]
+unique_name_in_owner = true
+title = "Close WorldGraph"
+ok_button_text = "Save"
+dialog_text = "Do you want to save before closing?"
+cancel_button_text = "Don't Save"
+
+[node name="FileButton" type="MenuButton" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "File"
+
+[node name="Body" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_76lym")
+
+[node name="MarginContainer" type="MarginContainer" parent="Body"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Body/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollBody" type="VBoxContainer" parent="Body/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FilePanel" type="PanelContainer" parent="Body/MarginContainer/ScrollContainer/ScrollBody"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tavod")
+
+[node name="MarginContainer" type="MarginContainer" parent="Body/MarginContainer/ScrollContainer/ScrollBody/FilePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 0
+
+[node name="FileBadge" parent="Body/MarginContainer/ScrollContainer/ScrollBody/FilePanel/MarginContainer" instance=ExtResource("2_5y2ox")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2

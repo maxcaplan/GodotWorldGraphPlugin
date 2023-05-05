@@ -4,9 +4,9 @@ extends HBoxContainer
 
 const DEFAULT_ICON_PATH := "res://addons/worldgraph/assets/plugin_icon.svg"
 
-@onready var unsaved_ui: Label = %Unsaved
-@onready var icon_ui: TextureRect = %Icon
-@onready var file_name_ui: Label = %FileName
+@onready var unsaved_ui: Label = get_node("%Unsaved")
+@onready var icon_ui: TextureRect = get_node("%Icon")
+@onready var file_name_ui: Label = get_node("%FileName")
 
 @export var icon: Texture2D = preload(DEFAULT_ICON_PATH) : set = _set_icon
 @export var is_saved: bool = true : set = _set_is_saved

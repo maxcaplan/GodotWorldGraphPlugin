@@ -2,10 +2,10 @@
 class_name GraphEditor
 extends SubViewportContainer
 
-@onready var sub_viewport: SubViewport = %SubViewport
-@onready var graph_ui: GraphUI = %GraphUI
-@onready var editor_overlay: CanvasLayer = %EditorOverlay
-@onready var background_texture: ColorRect = %Texture
+@onready var sub_viewport: SubViewport = get_node("%SubViewport")
+@onready var graph_ui: GraphUI = get_node("%GraphUI")
+@onready var editor_overlay: CanvasLayer = get_node("%EditorOverlay")
+@onready var background_texture: ColorRect = get_node("%Texture")
 
 var is_panning_camera = false
 var panning_mouse_start_pos = Vector2.ZERO
