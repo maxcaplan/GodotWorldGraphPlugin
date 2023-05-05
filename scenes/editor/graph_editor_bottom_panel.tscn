@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://cf5j5slsvnrfw"]
+
+[ext_resource type="Texture2D" uid="uid://dh6h8julxo2th" path="res://addons/worldgraph/assets/Back.svg" id="1_r88xc"]
+[ext_resource type="PackedScene" uid="uid://tjioesqpgvtl" path="res://addons/worldgraph/scenes/editor/side_bar/side_bar.tscn" id="1_rpl7d"]
+[ext_resource type="Script" path="res://addons/worldgraph/scripts/editor/graph_editor_panel.gd" id="1_t2shu"]
+[ext_resource type="PackedScene" uid="uid://bmuja5c7qt6gv" path="res://addons/worldgraph/scenes/editor/node_controls.tscn" id="2_50323"]
+[ext_resource type="PackedScene" uid="uid://44hk4r4ja41f" path="res://addons/worldgraph/scenes/editor/view_controls.tscn" id="3_klxkc"]
+[ext_resource type="PackedScene" uid="uid://doofdh7j7iqey" path="res://addons/worldgraph/scenes/editor/graph_editor.tscn" id="5_31myh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0k3dc"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="GraphEditorBottomPanel" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_t2shu")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SideBar" parent="HSplitContainer" instance=ExtResource("1_rpl7d")]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Body" type="VBoxContainer" parent="HSplitContainer"]
+layout_mode = 2
+
+[node name="Controls" type="HBoxContainer" parent="HSplitContainer/Body"]
+layout_mode = 2
+
+[node name="NodeControls" parent="HSplitContainer/Body/Controls" instance=ExtResource("2_50323")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RightAlign" type="HBoxContainer" parent="HSplitContainer/Body/Controls"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="ViewControls" parent="HSplitContainer/Body/Controls/RightAlign" instance=ExtResource("3_klxkc")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EditorPanel" type="PanelContainer" parent="HSplitContainer/Body"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_0k3dc")
+
+[node name="GraphEditor" parent="HSplitContainer/Body/EditorPanel" instance=ExtResource("5_31myh")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Footer" type="HBoxContainer" parent="HSplitContainer/Body"]
+layout_mode = 2
+
+[node name="SideBarToggleContainer" type="CenterContainer" parent="HSplitContainer/Body/Footer"]
+layout_mode = 2
+
+[node name="SideBarToggleButton" type="TextureButton" parent="HSplitContainer/Body/Footer/SideBarToggleContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture_normal = ExtResource("1_r88xc")
+stretch_mode = 5

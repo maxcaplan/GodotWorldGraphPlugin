@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmuja5c7qt6gv"]
+
+[ext_resource type="Texture2D" uid="uid://dkp83fhejmy62" path="res://addons/worldgraph/assets/add.svg" id="1_t8kk2"]
+[ext_resource type="Texture2D" uid="uid://c4s3vn46ashcb" path="res://addons/worldgraph/assets/remove.svg" id="2_julsc"]
+
+[node name="NodeControls" type="HBoxContainer"]
+
+[node name="AddNodeButton" type="Button" parent="."]
+layout_mode = 2
+text = "Add Node"
+icon = ExtResource("1_t8kk2")
+
+[node name="DeleteNodeButton" type="Button" parent="."]
+layout_mode = 2
+text = "Delete Node"
+icon = ExtResource("2_julsc")

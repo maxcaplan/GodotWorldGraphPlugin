@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://44hk4r4ja41f"]
+
+[ext_resource type="Script" path="res://addons/worldgraph/scripts/editor/controls/view_controls.gd" id="1_wr33k"]
+[ext_resource type="Texture2D" uid="uid://cevtkoaviw2jq" path="res://addons/worldgraph/assets/CenterView.svg" id="2_7kolo"]
+[ext_resource type="Texture2D" uid="uid://diija23h8ohmc" path="res://addons/worldgraph/assets/ZoomLess.svg" id="3_nkooc"]
+[ext_resource type="Texture2D" uid="uid://x73trdv186ph" path="res://addons/worldgraph/assets/ZoomReset.svg" id="4_dutpq"]
+[ext_resource type="Texture2D" uid="uid://cbowtjit7bllb" path="res://addons/worldgraph/assets/ZoomMore.svg" id="5_jrs1d"]
+
+[node name="ViewControls" type="HBoxContainer"]
+theme_override_constants/separation = 16
+script = ExtResource("1_wr33k")
+
+[node name="CenterViewContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="CenterViewButton" type="TextureButton" parent="CenterViewContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "Center View"
+texture_normal = ExtResource("2_7kolo")
+stretch_mode = 5
+
+[node name="ZoomControls" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="ZoomLessContainer" type="CenterContainer" parent="ZoomControls"]
+layout_mode = 2
+
+[node name="ZoomLessButton" type="TextureButton" parent="ZoomControls/ZoomLessContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "Center View"
+texture_normal = ExtResource("3_nkooc")
+stretch_mode = 5
+
+[node name="ZoomResetContainer" type="CenterContainer" parent="ZoomControls"]
+layout_mode = 2
+
+[node name="ZoomResetButton" type="TextureButton" parent="ZoomControls/ZoomResetContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "Center View"
+texture_normal = ExtResource("4_dutpq")
+stretch_mode = 5
+
+[node name="ZoomMoreContainer" type="CenterContainer" parent="ZoomControls"]
+layout_mode = 2
+
+[node name="ZoomMoreButton" type="TextureButton" parent="ZoomControls/ZoomMoreContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "Center View"
+texture_normal = ExtResource("5_jrs1d")
+stretch_mode = 5
